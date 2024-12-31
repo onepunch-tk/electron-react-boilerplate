@@ -1,8 +1,9 @@
-import {app, BrowserWindow} from "electron";
+import {app, BrowserWindow, session} from "electron";
 import {join} from "path";
-import {setupIpcHandlers} from "./ipcHandler.ts";
+
 import * as path from "node:path";
 import * as fs from "node:fs";
+import {setupIpcHandlers} from "./ipcHandler";
 
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -12,34 +13,34 @@ console.log("Preload file exists:", fs.existsSync(path.resolve(__dirname, 'prelo
 
 function createWindow() {
 	// CSP 설정
-	// session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-	// 	callback({
-	// 		responseHeaders: {
-	// 			...details.responseHeaders,
-	// 			'Content-Security-Policy': [
-	// 				isDev
-	// 					// 개발 환경 CSP
-	// 					? [
-	// 						`default-src 'self';`,
-	// 						`script-src 'self' 'unsafe-inline' 'unsafe-eval';`, // Vite와 React Refresh를 위해 필요
-	// 						`style-src 'self' 'unsafe-inline';`,
-	// 						`img-src 'self' data: https:;`,
-	// 						`font-src 'self';`,
-	// 						`connect-src 'self' ws://localhost:5173;` // Vite HMR
-	// 					].join(' ')
-	// 					// 프로덕션 환경 CSP
-	// 					: [
-	// 						`default-src 'self';`,
-	// 						`script-src 'self';`,
-	// 						`style-src 'self' 'unsafe-inline';`,
-	// 						`img-src 'self' data: https:;`,
-	// 						`font-src 'self';`,
-	// 						`connect-src 'self';`
-	// 					].join(' ')
-	// 			]
-	// 		}
-	// 	});
-	// });
+	session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+		callback({
+			responseHeaders: {
+				...details.responseHeaders,
+				'Content-Security-Policy': [
+					isDev
+						// 개발 환경 CSP
+						? [
+							`default-src 'self';`,
+							`script-src 'self' 'unsafe-inline' 'unsafe-eval';`, // Vite와 React Refresh를 위해 필요
+							`style-src 'self' 'unsafe-inline';`,
+							`img-src 'self' data: https:;`,
+							`font-src 'self';`,
+							`connect-src 'self' ws://localhost:5173;` // Vite HMR
+						].join(' ')
+						// 프로덕션 환경 CSP
+						: [
+							`default-src 'self';`,
+							`script-src 'self';`,
+							`style-src 'self' 'unsafe-inline';`,
+							`img-src 'self' data: https:;`,
+							`font-src 'self';`,
+							`connect-src 'self';`
+						].join(' ')
+				]
+			}
+		});
+	});
 	const preloadPath = join(__dirname, 'preload.js');
 
 	console.log("Preload absolute path:", preloadPath);

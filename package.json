@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "electron:dev": "pnpm build && concurrently -k \"cross-env BROWSER=none pnpm dev\" \"pnpm electron:watch\" \"pnpm electron\"",
+    "electron:dev": "pnpm electron:compile && concurrently -k \"cross-env BROWSER=none pnpm dev\" \"pnpm electron:watch\" \"pnpm electron\"",
     "electron": "wait-on tcp:5173 && cross-env NODE_ENV=development electron .",
     "electron:watch": "nodemon --watch 'src/main/**/*.ts' --exec 'pnpm electron:compile'",
     "electron:build": "electron-builder",
