@@ -1,7 +1,7 @@
 {
   "name": "electron-react-boilerplate",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "dist/main/index.js",
   "scripts": {
     "dev": "vite",

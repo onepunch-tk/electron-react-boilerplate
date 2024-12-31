@@ -12,7 +12,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 		console.log('getAppInfo called');
 		return ipcRenderer.invoke(IPC_CHANNELS.GET_APP_INFO);
 	},
-	updateCounter: (value: number) => {
+	updateCounter: (value:any) => {
 		console.log('updateCounter called');
 		return ipcRenderer.invoke(IPC_CHANNELS.UPDATE_COUNTER, value);
 	},
