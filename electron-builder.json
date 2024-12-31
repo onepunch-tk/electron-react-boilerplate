@@ -1,0 +1,17 @@
+{
+  "appId": "com.your-name.app",
+  "productName": "Your App Name",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json"
+  ],
+  "mac": {
+    "category": "public.app-category.developer-tools"
+  },
+  "win": {
+    "target": ["nsis"]
+  }
+}
