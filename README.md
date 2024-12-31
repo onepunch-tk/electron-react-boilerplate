@@ -54,7 +54,7 @@ pnpm electron:dev
 │   │   ├── App.tsx
 │   │   └── main.tsx
 │   ├── main/              # Electron 메인 프로세스
-│   │   ├── main.ts
+│   │   ├── index.ts
 │   │   └── preload.ts
 │   └── shared/            # 공유 타입과 유틸리티
 ├── public/                # 정적 자산

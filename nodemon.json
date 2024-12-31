@@ -1,0 +1,5 @@
+{
+  "watch": ["src/main"],
+  "ext": "ts",
+  "exec": "pnpm electron:compile"
+}
